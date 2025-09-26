@@ -35,7 +35,7 @@ Welcome to the TS4 Data Manager beta testing program! Your feedback helps us cre
 
 ### 1. Download Beta
 
-1. Go to [Releases](https://github.com/YOUR_USERNAME/TS4dataManager/releases)
+1. Go to [Releases](https://github.com/LarryAlexander/TS4dataManager/releases)
 2. Find the latest beta release (marked with "Pre-release")
 3. Download for your platform:
    - **Windows**: `TS4DataManager-Windows.zip`
@@ -161,7 +161,7 @@ Welcome to the TS4 Data Manager beta testing program! Your feedback helps us cre
 
 ### Bug Reports
 
-Use our [Bug Report Template](https://github.com/YOUR_USERNAME/TS4dataManager/issues/new?template=bug_report.md)
+Use our [Bug Report Template](https://github.com/LarryAlexander/TS4dataManager/issues/new?template=bug_report.md)
 
 **Include**:
 
@@ -173,7 +173,7 @@ Use our [Bug Report Template](https://github.com/YOUR_USERNAME/TS4dataManager/is
 
 ### Beta Feedback
 
-Use our [Beta Feedback Template](https://github.com/YOUR_USERNAME/TS4dataManager/issues/new?template=beta_feedback.md)
+Use our [Beta Feedback Template](https://github.com/LarryAlexander/TS4dataManager/issues/new?template=beta_feedback.md)
 
 **Include**:
 
@@ -257,9 +257,9 @@ Use our [Beta Feedback Template](https://github.com/YOUR_USERNAME/TS4dataManager
 
 ## ❓ Questions?
 
-- **General Questions**: [Start a Discussion](https://github.com/YOUR_USERNAME/TS4dataManager/discussions)
-- **Bug Reports**: [Create an Issue](https://github.com/YOUR_USERNAME/TS4dataManager/issues)
-- **Feature Ideas**: [Feature Request](https://github.com/YOUR_USERNAME/TS4dataManager/issues/new?template=feature_request.md)
+- **General Questions**: [Start a Discussion](https://github.com/LarryAlexander/TS4dataManager/discussions)
+- **Bug Reports**: [Create an Issue](https://github.com/LarryAlexander/TS4dataManager/issues)
+- **Feature Ideas**: [Feature Request](https://github.com/LarryAlexander/TS4dataManager/issues/new?template=feature_request.md)
 
 ---
 

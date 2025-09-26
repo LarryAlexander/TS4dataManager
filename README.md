@@ -2,9 +2,9 @@
 
 A git-style data manager for The Sims 4 that coexists with mod managers.
 
-[![Build Status](https://github.com/YOUR_USERNAME/TS4dataManager/workflows/Build/badge.svg)](https://github.com/YOUR_USERNAME/TS4dataManager/actions)
-[![Release](https://img.shields.io/github/v/release/YOUR_USERNAME/TS4dataManager)](https://github.com/YOUR_USERNAME/TS4dataManager/releases)
-[![License](https://img.shields.io/github/license/YOUR_USERNAME/TS4dataManager)](LICENSE)
+[![Build Status](https://github.com/LarryAlexander/TS4dataManager/workflows/Build/badge.svg)](https://github.com/LarryAlexander/TS4dataManager/actions)
+[![Release](https://img.shields.io/github/v/release/LarryAlexander/TS4dataManager)](https://github.com/LarryAlexander/TS4dataManager/releases)
+[![License](https://img.shields.io/github/license/LarryAlexander/TS4dataManager)](LICENSE)
 
 ## 🎯 What is TS4 Data Manager?
 
@@ -21,19 +21,14 @@ TS4 Data Manager brings git-style version control to your Sims 4 data. Create sn
 
 ## 📥 Download
 
-### Stable Release
+### Latest Release
+- [Download for Windows](https://github.com/LarryAlexander/TS4dataManager/releases/latest/download/TS4DataManager-Windows.zip)
+- [Download for macOS](https://github.com/LarryAlexander/TS4dataManager/releases/latest/download/TS4DataManager-macOS.zip)  
+- [Download for Linux](https://github.com/LarryAlexander/TS4dataManager/releases/latest/download/TS4DataManager-Linux.tar.gz)
 
-[Download Latest Release](https://github.com/YOUR_USERNAME/TS4dataManager/releases/latest)
-
-### Beta Testing
-
-Join our beta program: [Beta Releases](https://github.com/YOUR_USERNAME/TS4dataManager/releases)
-
-**Supported Platforms:**
-
-- Windows 10/11 (64-bit) ✅
-- macOS 10.15+ (Intel & Apple Silicon) ✅
-- Linux (Ubuntu 20.04+, Fedora 35+) ✅
+### Beta Releases
+- [View All Releases](https://github.com/LarryAlexander/TS4dataManager/releases)
+- [Beta Testing Guide](docs/BETA_TESTING.md)
 
 ## 🚀 Quick Start
 
@@ -56,10 +51,10 @@ We're actively seeking beta testers! Here's how to help:
 
 ### How to Participate
 
-1. Download the [latest beta release](https://github.com/YOUR_USERNAME/TS4dataManager/releases)
+1. Download the [latest beta release](https://github.com/LarryAlexander/TS4dataManager/releases)
 2. Test core functionality: profile creation, Sims 4 discovery, basic UI
-3. [Report bugs](https://github.com/YOUR_USERNAME/TS4dataManager/issues/new?template=bug_report.md) with detailed steps
-4. [Suggest features](https://github.com/YOUR_USERNAME/TS4dataManager/issues/new?template=feature_request.md)
+3. [Report bugs](https://github.com/LarryAlexander/TS4dataManager/issues/new?template=bug_report.md) with detailed steps
+4. [Suggest features](https://github.com/LarryAlexander/TS4dataManager/issues/new?template=feature_request.md)
 
 ### What We're Testing
 
@@ -71,8 +66,8 @@ We're actively seeking beta testers! Here's how to help:
 
 ### Beta Feedback
 
-- [Current Beta Issues](https://github.com/YOUR_USERNAME/TS4dataManager/labels/beta)
-- [Beta Testing Discussion](https://github.com/YOUR_USERNAME/TS4dataManager/discussions/categories/beta-testing)
+- [Current Beta Issues](https://github.com/LarryAlexander/TS4dataManager/labels/beta)
+- [Beta Testing Discussion](https://github.com/LarryAlexander/TS4dataManager/discussions/categories/beta-testing)
 
 ## 🛠 Development
 
@@ -85,7 +80,7 @@ We're actively seeking beta testers! Here's how to help:
 ### Building from Source
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/TS4dataManager.git
+git clone https://github.com/LarryAlexander/TS4dataManager.git
 cd TS4dataManager/app
 flutter pub get
 flutter build windows/macos/linux --release
@@ -135,9 +130,9 @@ This project is licensed under the [MIT License](LICENSE) - see the LICENSE file
 
 ## 🤝 Support
 
-- **Bug Reports**: [Create an issue](https://github.com/YOUR_USERNAME/TS4dataManager/issues/new?template=bug_report.md)
-- **Feature Requests**: [Suggest a feature](https://github.com/YOUR_USERNAME/TS4dataManager/issues/new?template=feature_request.md)
-- **Discussions**: [Join the community](https://github.com/YOUR_USERNAME/TS4dataManager/discussions)
+- **Bug Reports**: [Create an issue](https://github.com/LarryAlexander/TS4dataManager/issues/new?template=bug_report.md)
+- **Feature Requests**: [Suggest a feature](https://github.com/LarryAlexander/TS4dataManager/issues/new?template=feature_request.md)
+- **Discussions**: [Join the community](https://github.com/LarryAlexander/TS4dataManager/discussions)
 - **Beta Testing**: [Join the beta program](#-beta-testing)
 
 ## 🙏 Acknowledgments
