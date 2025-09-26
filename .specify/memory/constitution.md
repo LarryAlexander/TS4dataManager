@@ -1,50 +1,81 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!--
+Sync Impact Report:
+Version change: Initial → 1.0.0
+New Constitution: Complete initial constitution for Sims 4 Data Manager
+Added sections: All core principles and governance framework established
+Templates requiring updates:
+- ✅ Updated: constitution.md (new)
+- ⚠ Pending: plan-template.md, spec-template.md, tasks-template.md (consistency check required)
+Follow-up TODOs: Review dependent templates for alignment with Sims 4 modding principles
+-->
+
+# TS4 Data Manager Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. User-Centric Design (NON-NEGOTIABLE)
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+All features MUST prioritize the needs of casual Sims 4 modders who lack technical expertise.
+Every interface element MUST be intuitive, clearly labeled, and provide helpful tooltips or guidance.
+Complex operations MUST be abstracted behind simple GUI controls with clear visual feedback.
+The application MUST never require users to interact with command lines, file paths, or technical configurations directly.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### II. Non-Destructive Operations
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+All data management operations MUST be reversible through version tracking and snapshots.
+Before any modification to user files (saves, mods, worlds), the system MUST create automatic backups.
+Users MUST be able to restore any previous state of their Sims 4 data with a single click.
+Deletion operations MUST move files to a recoverable staging area, not permanent deletion.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### III. Git-Style Version Control
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+The application MUST implement git-like version tracking for all Sims 4 data directories.
+Each change to mods, saves, or worlds MUST be tracked with timestamps, descriptions, and diff summaries.
+Users MUST be able to view change history, compare versions, and revert to any previous state.
+The version control system MUST operate transparently without requiring user understanding of git concepts.
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+### IV. Mod Manager Integration
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+The application MUST work alongside existing mod managers without conflicts or interference.
+File operations MUST respect mod manager structures and avoid breaking existing workflows.
+The system MUST detect and integrate with popular mod managers (Mod Organizer 2, Vortex, etc.) when present.
+Mod changes made through external tools MUST be automatically detected and tracked.
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+### V. Safe File Management
+
+All file operations MUST include integrity checks and validation before execution.
+The system MUST detect and prevent operations that could corrupt save files or break mod dependencies.
+Users MUST receive clear warnings before potentially risky operations with detailed explanations.
+Automated file organization MUST preserve original file relationships and mod load orders.
+
+## Data Protection Standards
+
+The application MUST implement multiple layers of data protection:
+
+- Automatic periodic snapshots of all tracked directories
+- Real-time monitoring for file corruption or unexpected changes
+- Quarantine system for suspicious or potentially harmful mods
+- Emergency recovery mode to restore from catastrophic data loss
+
+## User Experience Requirements
+
+The GUI MUST follow modern usability principles:
+
+- Visual hierarchy that guides users through complex operations
+- Progress indicators for all long-running operations
+- Contextual help and educational tooltips throughout the interface
+- Accessibility compliance for users with disabilities
+- Responsive design that works on various screen sizes and resolutions
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+This constitution supersedes all other development practices and design decisions.
+All features and changes MUST be evaluated against these core principles before implementation.
+Any deviation from these principles requires explicit documentation and user impact assessment.
+The constitution may only be amended through formal review process with stakeholder approval.
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+All code reviews MUST verify compliance with user-centric design and data protection principles.
+Feature complexity MUST be justified in terms of user value, not technical elegance.
+Development decisions MUST prioritize user safety and data integrity over performance optimizations.
+
+**Version**: 1.0.0 | **Ratified**: 2025-09-26 | **Last Amended**: 2025-09-26

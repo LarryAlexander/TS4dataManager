@@ -1,0 +1,243 @@
+name: Build and Release
+
+on:
+  push:
+    branches: [main, develop]
+    tags: ["v*"]
+  pull_request:
+    branches: [main]
+
+env:
+  FLUTTER_VERSION: "3.35.2"
+
+jobs:
+  # Build for Windows
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: "stable"
+          cache: true
+
+      - name: Install dependencies
+        working-directory: ./app
+        run: flutter pub get
+
+      - name: Run tests
+        working-directory: ./app
+        run: flutter test
+
+      - name: Build Windows Release
+        working-directory: ./app
+        run: flutter build windows --release
+
+      - name: Package Windows Build
+        shell: pwsh
+        run: |
+          $buildPath = "app/build/windows/x64/runner/Release"
+          $packagePath = "TS4DataManager-Windows"
+
+          # Create package directory
+          New-Item -ItemType Directory -Force -Path $packagePath
+
+          # Copy build files
+          Copy-Item -Path "$buildPath/*" -Destination $packagePath -Recurse
+
+          # Copy documentation
+          Copy-Item -Path "README_WINDOWS_DISTRIBUTION.md" -Destination "$packagePath/README.md" -ErrorAction SilentlyContinue
+
+          # Create version file
+          @"
+          TS4 Data Manager Windows Build
+          Version: ${{ github.ref_name }}
+          Built: $(Get-Date -Format "yyyy-MM-dd HH:mm:ss UTC")
+          Commit: ${{ github.sha }}
+          "@.Trim() | Out-File -FilePath "$packagePath/VERSION.txt" -Encoding UTF8
+
+          # Create zip
+          Compress-Archive -Path $packagePath -DestinationPath "TS4DataManager-Windows.zip"
+
+      - name: Upload Windows Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-build
+          path: TS4DataManager-Windows.zip
+          retention-days: 30
+
+  # Build for macOS
+  build-macos:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: "stable"
+          cache: true
+
+      - name: Install dependencies
+        working-directory: ./app
+        run: flutter pub get
+
+      - name: Run tests
+        working-directory: ./app
+        run: flutter test
+
+      - name: Build macOS Release
+        working-directory: ./app
+        run: flutter build macos --release
+
+      - name: Package macOS Build
+        run: |
+          # Create package directory
+          mkdir -p TS4DataManager-macOS
+
+          # Copy app bundle
+          cp -r app/build/macos/Build/Products/Release/ts4_data_manager.app TS4DataManager-macOS/
+
+          # Copy documentation
+          cp README.md TS4DataManager-macOS/ || true
+
+          # Create version file
+          cat > TS4DataManager-macOS/VERSION.txt << EOF
+          TS4 Data Manager macOS Build
+          Version: ${{ github.ref_name }}
+          Built: $(date -u)
+          Commit: ${{ github.sha }}
+          EOF
+
+          # Create DMG (optional) or zip
+          zip -r TS4DataManager-macOS.zip TS4DataManager-macOS/
+
+      - name: Upload macOS Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: macos-build
+          path: TS4DataManager-macOS.zip
+          retention-days: 30
+
+  # Build for Linux
+  build-linux:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Linux dependencies
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y ninja-build libgtk-3-dev
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: "stable"
+          cache: true
+
+      - name: Enable Linux desktop
+        run: flutter config --enable-linux-desktop
+
+      - name: Install dependencies
+        working-directory: ./app
+        run: flutter pub get
+
+      - name: Run tests
+        working-directory: ./app
+        run: flutter test
+
+      - name: Build Linux Release
+        working-directory: ./app
+        run: flutter build linux --release
+
+      - name: Package Linux Build
+        run: |
+          # Create package directory
+          mkdir -p TS4DataManager-Linux
+
+          # Copy build files
+          cp -r app/build/linux/x64/release/bundle/* TS4DataManager-Linux/
+
+          # Copy documentation
+          cp README.md TS4DataManager-Linux/ || true
+
+          # Create version file
+          cat > TS4DataManager-Linux/VERSION.txt << EOF
+          TS4 Data Manager Linux Build
+          Version: ${{ github.ref_name }}
+          Built: $(date -u)
+          Commit: ${{ github.sha }}
+          EOF
+
+          # Create tar.gz
+          tar -czf TS4DataManager-Linux.tar.gz TS4DataManager-Linux/
+
+      - name: Upload Linux Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: linux-build
+          path: TS4DataManager-Linux.tar.gz
+          retention-days: 30
+
+  # Create Release (only on tags)
+  create-release:
+    if: startsWith(github.ref, 'refs/tags/')
+    needs: [build-windows, build-macos, build-linux]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts/
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: TS4 Data Manager ${{ github.ref_name }}
+          draft: false
+          prerelease: ${{ contains(github.ref_name, 'beta') || contains(github.ref_name, 'alpha') || contains(github.ref_name, 'rc') }}
+          generate_release_notes: true
+          files: |
+            artifacts/windows-build/TS4DataManager-Windows.zip
+            artifacts/macos-build/TS4DataManager-macOS.zip
+            artifacts/linux-build/TS4DataManager-Linux.tar.gz
+          body: |
+            ## What's New in ${{ github.ref_name }}
+
+            ### 🚀 Features
+            - Profile management system
+            - Automatic Sims 4 discovery
+            - Cross-platform support (Windows, macOS, Linux)
+            - Privacy-focused design (no telemetry)
+
+            ### 🐛 Bug Fixes
+            - Various stability improvements
+
+            ### 📥 Downloads
+            - **Windows**: Download `TS4DataManager-Windows.zip`
+            - **macOS**: Download `TS4DataManager-macOS.zip` 
+            - **Linux**: Download `TS4DataManager-Linux.tar.gz`
+
+            ### 🧪 Beta Testing
+            This is a beta release. Please report any issues you encounter!
+
+            ### 📋 Installation
+            1. Download the appropriate file for your platform
+            2. Extract the archive
+            3. Run the executable (`ts4_data_manager.exe` on Windows, app bundle on macOS, or `ts4_data_manager` on Linux)
+
+            **System Requirements:**
+            - Windows 10+ (64-bit) / macOS 10.15+ / Linux (Ubuntu 20.04+)
+            - The Sims 4 installed and run at least once
+            - 5GB free disk space (configurable)
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
