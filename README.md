@@ -22,11 +22,13 @@ TS4 Data Manager brings git-style version control to your Sims 4 data. Create sn
 ## 📥 Download
 
 ### Latest Release
+
 - [Download for Windows](https://github.com/LarryAlexander/TS4dataManager/releases/latest/download/TS4DataManager-Windows.zip)
-- [Download for macOS](https://github.com/LarryAlexander/TS4dataManager/releases/latest/download/TS4DataManager-macOS.zip)  
+- [Download for macOS](https://github.com/LarryAlexander/TS4dataManager/releases/latest/download/TS4DataManager-macOS.zip)
 - [Download for Linux](https://github.com/LarryAlexander/TS4dataManager/releases/latest/download/TS4DataManager-Linux.tar.gz)
 
 ### Beta Releases
+
 - [View All Releases](https://github.com/LarryAlexander/TS4dataManager/releases)
 - [Beta Testing Guide](docs/BETA_TESTING.md)
 
