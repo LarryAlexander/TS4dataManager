@@ -100,13 +100,16 @@ jobs:
         working-directory: ./app
         run: flutter build macos --release
 
+      - name: List macOS build output
+        run: ls -la app/build/macos/Build/Products/Release/
+
       - name: Package macOS Build
         run: |
           # Create package directory
           mkdir -p TS4DataManager-macOS
 
-          # Copy app bundle
-          cp -r app/build/macos/Build/Products/Release/ts4_data_manager.app TS4DataManager-macOS/
+          # Copy app bundle (actual name is app.app, not ts4_data_manager.app)
+          cp -r app/build/macos/Build/Products/Release/app.app TS4DataManager-macOS/ts4_data_manager.app
 
           # Copy documentation
           cp README.md TS4DataManager-macOS/ || true
@@ -161,6 +164,9 @@ jobs:
       - name: Build Linux Release
         working-directory: ./app
         run: flutter build linux --release
+
+      - name: List Linux build output
+        run: ls -la app/build/linux/x64/release/bundle/
 
       - name: Package Linux Build
         run: |
